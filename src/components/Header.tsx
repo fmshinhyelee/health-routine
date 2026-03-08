@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { useHealthStore } from '../hooks/useHealthStore'
+import { useAuthStore } from '../hooks/useAuthStore'
 import { loadAllRecords } from '../lib/storage'
 import type { Session } from '../lib/types'
 
 export default function Header() {
   const { session, setSession } = useHealthStore()
+  const { user, signOut } = useAuthStore()
   const [streak, setStreak] = useState(0)
 
   const today = new Date().toLocaleDateString('ko-KR', {
@@ -50,8 +52,17 @@ export default function Header() {
           </div>
           <div className="text-[13px] text-sub">{today}</div>
         </div>
-        <div className="rounded-full bg-gradient-to-br from-[#f97316] to-[#ef4444] px-2.5 py-1 text-[13px] font-bold text-white">
-          🔥 {streak}일
+        <div className="flex items-center gap-2">
+          <div className="rounded-full bg-gradient-to-br from-[#f97316] to-[#ef4444] px-2.5 py-1 text-[13px] font-bold text-white">
+            🔥 {streak}일
+          </div>
+          <button
+            onClick={signOut}
+            className="rounded-full bg-card2 px-2.5 py-1 text-[11px] text-sub transition-colors active:bg-border"
+            title={user?.email ?? ''}
+          >
+            로그아웃
+          </button>
         </div>
       </div>
       <div className="flex gap-1 rounded-xl bg-card2 p-1">

@@ -1,30 +1,37 @@
 import { create } from 'zustand'
 import type { Routine, RoutineCompletion } from '../lib/types'
 
-const ROUTINES_KEY = 'health_tracker_routines'
-const COMPLETIONS_KEY = 'health_tracker_routine_completions'
+let userId = ''
+
+function routinesKey() {
+  return `health_tracker_routines${userId ? `_${userId}` : ''}`
+}
+function completionsKey() {
+  return `health_tracker_routine_completions${userId ? `_${userId}` : ''}`
+}
 
 function loadRoutines(): Routine[] {
-  try { return JSON.parse(localStorage.getItem(ROUTINES_KEY) || '[]') }
+  try { return JSON.parse(localStorage.getItem(routinesKey()) || '[]') }
   catch { return [] }
 }
 
 function persistRoutines(routines: Routine[]) {
-  localStorage.setItem(ROUTINES_KEY, JSON.stringify(routines))
+  localStorage.setItem(routinesKey(), JSON.stringify(routines))
 }
 
 function loadCompletions(): RoutineCompletion[] {
-  try { return JSON.parse(localStorage.getItem(COMPLETIONS_KEY) || '[]') }
+  try { return JSON.parse(localStorage.getItem(completionsKey()) || '[]') }
   catch { return [] }
 }
 
 function persistCompletions(completions: RoutineCompletion[]) {
-  localStorage.setItem(COMPLETIONS_KEY, JSON.stringify(completions))
+  localStorage.setItem(completionsKey(), JSON.stringify(completions))
 }
 
 interface RoutineStore {
   routines: Routine[]
   completions: RoutineCompletion[]
+  setUserId: (id: string) => void
   addRoutine: (routine: Omit<Routine, 'id' | 'createdAt'>) => void
   removeRoutine: (id: string) => void
   toggleCompletion: (routineId: string, date: string) => void
@@ -35,6 +42,11 @@ interface RoutineStore {
 export const useRoutineStore = create<RoutineStore>((set, get) => ({
   routines: loadRoutines(),
   completions: loadCompletions(),
+
+  setUserId: (id) => {
+    userId = id
+    set({ routines: loadRoutines(), completions: loadCompletions() })
+  },
 
   addRoutine: (partial) => {
     const routine: Routine = {

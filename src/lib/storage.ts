@@ -1,11 +1,19 @@
 import { supabase } from './supabase'
 
-// Custom exercises
-const CUSTOM_EXERCISES_KEY = 'health_tracker_custom_exercises'
+// Custom exercises (user-scoped)
+let _userId = ''
+
+export function setStorageUserId(id: string) {
+  _userId = id
+}
+
+function customExercisesKey() {
+  return `health_tracker_custom_exercises${_userId ? `_${_userId}` : ''}`
+}
 
 export function getCustomExercises(): string[] {
   try {
-    return JSON.parse(localStorage.getItem(CUSTOM_EXERCISES_KEY) || '[]')
+    return JSON.parse(localStorage.getItem(customExercisesKey()) || '[]')
   } catch {
     return []
   }
@@ -15,7 +23,7 @@ export function addCustomExercise(name: string): string[] {
   const list = getCustomExercises()
   if (!list.includes(name)) {
     list.push(name)
-    localStorage.setItem(CUSTOM_EXERCISES_KEY, JSON.stringify(list))
+    localStorage.setItem(customExercisesKey(), JSON.stringify(list))
   }
   return list
 }
