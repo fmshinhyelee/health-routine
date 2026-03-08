@@ -6,6 +6,7 @@ import MealCard from './cards/MealCard'
 import WaterCard from './cards/WaterCard'
 import BodyCard from './cards/BodyCard'
 import ConditionCard from './cards/ConditionCard'
+import RoutineCard from './cards/RoutineCard'
 
 export default function LogPage() {
   const { save, saving } = useHealthStore()
@@ -23,6 +24,7 @@ export default function LogPage() {
       <WaterCard />
       <BodyCard />
       <ConditionCard />
+      <RoutineCard />
       <button
         onClick={handleSave}
         disabled={saving}

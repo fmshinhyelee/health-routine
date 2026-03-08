@@ -1,3 +1,8 @@
+export interface NapEntry {
+  start: string
+  end: string
+}
+
 export interface HealthRecord {
   id?: string
   user_id?: string
@@ -6,6 +11,7 @@ export interface HealthRecord {
   sleep_bed: string
   sleep_wake: string
   sleep_quality: number
+  naps: NapEntry[]
   exercise_tags: string[]
   exercise_minutes: number | null
   exercise_intensity: string
@@ -21,5 +27,25 @@ export interface HealthRecord {
   created_at?: string
 }
 
-export type Page = 'log' | 'summary' | 'history'
+export interface Routine {
+  id: string
+  name: string
+  time: string
+  recurrence: 'daily' | 'weekdays' | 'weekends'
+  notifyEnabled: boolean
+  createdAt: string
+}
+
+export interface RoutineCompletion {
+  routineId: string
+  date: string
+}
+
+export interface MonthlyGoal {
+  month: string
+  target_weight: number | null
+  target_blood_sugar: number | null
+}
+
+export type Page = 'log' | 'summary' | 'history' | 'goal'
 export type Session = 'morning' | 'evening'

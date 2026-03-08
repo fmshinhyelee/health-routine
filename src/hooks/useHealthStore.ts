@@ -13,6 +13,7 @@ function createEmptyRecord(date: string, session: Session): HealthRecord {
     sleep_bed: '23:00',
     sleep_wake: '07:00',
     sleep_quality: 3,
+    naps: [],
     exercise_tags: [],
     exercise_minutes: null,
     exercise_intensity: '보통',

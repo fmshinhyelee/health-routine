@@ -6,6 +6,7 @@ import Toast from './components/Toast'
 import LogPage from './components/LogPage'
 import SummaryPage from './components/SummaryPage'
 import HistoryPage from './components/HistoryPage'
+import GoalPage from './components/GoalPage'
 
 export default function App() {
   const { page, loadToday } = useHealthStore()
@@ -19,6 +20,7 @@ export default function App() {
       <Header />
       {page === 'log' && <LogPage />}
       {page === 'summary' && <SummaryPage />}
+      {page === 'goal' && <GoalPage />}
       {page === 'history' && <HistoryPage />}
       <BottomNav />
       <Toast />

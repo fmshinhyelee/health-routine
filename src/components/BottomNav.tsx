@@ -1,11 +1,12 @@
 import { useHealthStore } from '../hooks/useHealthStore'
 import type { Page } from '../lib/types'
-import { HiOutlineClipboardDocumentList } from 'react-icons/hi2'
-import { HiOutlineChartBar, HiOutlineClock } from 'react-icons/hi2'
+import { HiOutlineClipboardDocumentList, HiOutlineChartBar, HiOutlineClock } from 'react-icons/hi2'
+import { HiOutlineFlag } from 'react-icons/hi2'
 
 const navItems: { key: Page; label: string; Icon: typeof HiOutlineClipboardDocumentList }[] = [
   { key: 'log', label: '기록', Icon: HiOutlineClipboardDocumentList },
   { key: 'summary', label: '요약', Icon: HiOutlineChartBar },
+  { key: 'goal', label: '목표', Icon: HiOutlineFlag },
   { key: 'history', label: '히스토리', Icon: HiOutlineClock },
 ]
 

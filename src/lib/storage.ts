@@ -1,4 +1,24 @@
 import { supabase } from './supabase'
+
+// Custom exercises
+const CUSTOM_EXERCISES_KEY = 'health_tracker_custom_exercises'
+
+export function getCustomExercises(): string[] {
+  try {
+    return JSON.parse(localStorage.getItem(CUSTOM_EXERCISES_KEY) || '[]')
+  } catch {
+    return []
+  }
+}
+
+export function addCustomExercise(name: string): string[] {
+  const list = getCustomExercises()
+  if (!list.includes(name)) {
+    list.push(name)
+    localStorage.setItem(CUSTOM_EXERCISES_KEY, JSON.stringify(list))
+  }
+  return list
+}
 import type { HealthRecord } from './types'
 
 const LOCAL_KEY = 'health_tracker_v2'
