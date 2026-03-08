@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm create vite@latest . -- --template react-ts)",
+      "Bash(npx --yes create-vite@latest temp-project --template react-ts)",
+      "Bash(npm install)",
+      "Bash(npm install tailwindcss @tailwindcss/vite zustand @supabase/supabase-js react-icons recharts vite-plugin-pwa)",
+      "Bash(npx tsc --noEmit)",
+      "Bash(npm run build)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(gh auth status)",
+      "Bash(brew list gh)",
+      "Bash(brew install gh)",
+      "Bash(gh auth login --web -p https)",
+      "Bash(git init)",
+      "Bash(git add -A)"
+    ]
+  }
+}
