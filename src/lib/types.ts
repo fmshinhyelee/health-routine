@@ -7,7 +7,6 @@ export interface HealthRecord {
   id?: string
   user_id?: string
   date: string
-  session: 'morning' | 'evening'
   sleep_bed: string
   sleep_wake: string
   sleep_quality: number
@@ -24,6 +23,8 @@ export interface HealthRecord {
   weight: number | null
   condition_score: number
   memo: string
+  illness_name: string
+  illness_memo: string
   created_at?: string
 }
 
@@ -48,4 +49,3 @@ export interface MonthlyGoal {
 }
 
 export type Page = 'log' | 'summary' | 'history' | 'goal'
-export type Session = 'morning' | 'evening'

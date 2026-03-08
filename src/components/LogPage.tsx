@@ -6,6 +6,7 @@ import MealCard from './cards/MealCard'
 import WaterCard from './cards/WaterCard'
 import BodyCard from './cards/BodyCard'
 import ConditionCard from './cards/ConditionCard'
+import IllnessCard from './cards/IllnessCard'
 import RoutineCard from './cards/RoutineCard'
 
 export default function LogPage() {
@@ -24,6 +25,7 @@ export default function LogPage() {
       <WaterCard />
       <BodyCard />
       <ConditionCard />
+      <IllnessCard />
       <RoutineCard />
       <button
         onClick={handleSave}

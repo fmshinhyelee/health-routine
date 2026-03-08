@@ -19,7 +19,6 @@ export default function HistoryPage() {
         <div className="py-10 text-center text-sm text-sub">아직 기록이 없어요 😊</div>
       ) : (
         records.map((r) => {
-          const sessLabel = r.session === 'morning' ? '🌅 아침' : '🌙 저녁'
           const chips = [
             r.weight && `몸무게 ${r.weight}kg`,
             r.blood_sugar && `혈당 ${r.blood_sugar}mg`,
@@ -29,9 +28,9 @@ export default function HistoryPage() {
           ].filter(Boolean)
 
           return (
-            <div key={`${r.date}_${r.session}`} className="mb-2 rounded-xl border border-border bg-card px-3.5 py-3">
+            <div key={r.date} className="mb-2 rounded-xl border border-border bg-card px-3.5 py-3">
               <div className="mb-1.5 text-xs text-sub">
-                {r.date} {sessLabel}
+                {r.date}
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {chips.length > 0 ? (

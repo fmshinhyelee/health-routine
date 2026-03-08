@@ -33,7 +33,7 @@ export default function GoalPage() {
       (records) => {
         const byDate: Record<string, HealthRecord> = {}
         records.forEach((r) => {
-          if (!byDate[r.date] || r.session === 'evening') byDate[r.date] = r
+          byDate[r.date] = r
         })
 
         const wData = []

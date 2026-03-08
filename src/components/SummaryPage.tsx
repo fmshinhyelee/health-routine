@@ -22,10 +22,7 @@ export default function SummaryPage() {
   useEffect(() => {
     const today = new Date().toISOString().slice(0, 10)
 
-    // Load today's record (prefer evening)
-    Promise.all([loadRecord(today, 'evening'), loadRecord(today, 'morning')]).then(
-      ([eve, morn]) => setRecord(eve || morn)
-    )
+    loadRecord(today).then((data) => setRecord(data))
 
     // Load week data for chart
     const end = new Date()
@@ -35,7 +32,7 @@ export default function SummaryPage() {
       (records) => {
         const byDate: Record<string, HealthRecord> = {}
         records.forEach((r) => {
-          if (!byDate[r.date] || r.session === 'evening') byDate[r.date] = r
+          byDate[r.date] = r
         })
         const data = []
         for (let i = 6; i >= 0; i--) {

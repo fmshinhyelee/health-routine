@@ -43,12 +43,12 @@ function setLocalStore(data: Record<string, HealthRecord>) {
   localStorage.setItem(LOCAL_KEY, JSON.stringify(data))
 }
 
-function makeKey(date: string, session: string) {
-  return `${date}_${session}`
+function makeKey(date: string) {
+  return date
 }
 
 export async function saveRecord(record: HealthRecord): Promise<void> {
-  const key = makeKey(record.date, record.session)
+  const key = makeKey(record.date)
 
   // Always save locally
   const store = getLocalStore()
@@ -72,8 +72,8 @@ export async function saveRecord(record: HealthRecord): Promise<void> {
   }
 }
 
-export async function loadRecord(date: string, session: string): Promise<HealthRecord | null> {
-  const key = makeKey(date, session)
+export async function loadRecord(date: string): Promise<HealthRecord | null> {
+  const key = makeKey(date)
 
   // Try Supabase first
   if (supabase) {

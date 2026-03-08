@@ -17,7 +17,7 @@ export default function MealCard() {
   const loadPhotos = useCallback(async () => {
     const urls: Record<string, string> = {}
     for (const m of meals) {
-      const key = `${record.date}_${record.session}_${m.key}`
+      const key = `${record.date}_${m.key}`
       try {
         const blob = await loadMealPhoto(key)
         if (blob) urls[m.key] = URL.createObjectURL(blob)
@@ -27,7 +27,7 @@ export default function MealCard() {
       Object.values(prev).forEach(URL.revokeObjectURL)
       return urls
     })
-  }, [record.date, record.session])
+  }, [record.date])
 
   useEffect(() => {
     loadPhotos()
@@ -36,7 +36,7 @@ export default function MealCard() {
   const handlePhotoUpload = async (mealKey: string, e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    const key = `${record.date}_${record.session}_${mealKey}`
+    const key = `${record.date}_${mealKey}`
     await saveMealPhoto(key, file)
     setPhotos((prev) => {
       if (prev[mealKey]) URL.revokeObjectURL(prev[mealKey])
@@ -45,7 +45,7 @@ export default function MealCard() {
   }
 
   const handleDeletePhoto = async (mealKey: string) => {
-    const key = `${record.date}_${record.session}_${mealKey}`
+    const key = `${record.date}_${mealKey}`
     await deleteMealPhoto(key)
     setPhotos((prev) => {
       if (prev[mealKey]) URL.revokeObjectURL(prev[mealKey])

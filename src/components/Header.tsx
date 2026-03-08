@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react'
-import { useHealthStore } from '../hooks/useHealthStore'
 import { useAuthStore } from '../hooks/useAuthStore'
 import { loadAllRecords } from '../lib/storage'
-import type { Session } from '../lib/types'
 
 export default function Header() {
-  const { session, setSession } = useHealthStore()
   const { user, signOut } = useAuthStore()
   const [streak, setStreak] = useState(0)
 
@@ -38,14 +35,9 @@ export default function Header() {
     })
   }, [])
 
-  const tabs: { key: Session; label: string }[] = [
-    { key: 'morning', label: '🌅 아침' },
-    { key: 'evening', label: '🌙 저녁' },
-  ]
-
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-gradient-to-br from-[#1e1b4b] to-card px-4 pt-5 pb-4">
-      <div className="mb-3 flex items-center justify-between">
+      <div className="flex items-center justify-between">
         <div>
           <div className="bg-gradient-to-r from-accent to-accent2 bg-clip-text text-lg font-bold text-transparent">
             💚 건강 루틴
@@ -64,21 +56,6 @@ export default function Header() {
             로그아웃
           </button>
         </div>
-      </div>
-      <div className="flex gap-1 rounded-xl bg-card2 p-1">
-        {tabs.map((t) => (
-          <button
-            key={t.key}
-            onClick={() => setSession(t.key)}
-            className={`flex-1 rounded-[10px] py-2 text-sm font-semibold transition-all ${
-              session === t.key
-                ? 'bg-accent text-white'
-                : 'text-sub'
-            }`}
-          >
-            {t.label}
-          </button>
-        ))}
       </div>
     </header>
   )
